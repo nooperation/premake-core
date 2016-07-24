@@ -1,11 +1,14 @@
 os:
 - linux
 - osx
+branches:
+  except:
+    - /^build-([0-9]+)-/
 script:
 - make -f Bootstrap.mak $TRAVIS_OS_NAME
 - bin/release/premake5 test
 before_deploy:
-- export GIT_TAG=build-$TRAVIS_BUILD_NUMBER-$TRAVIS_BRANCH-$(date -u '+%Y-%m-%d')
+- export GIT_TAG=build-$TRAVIS_BUILD_NUMBER-$TRAVIS_OS_NAME-$TRAVIS_BRANCH-$(date -u '+%Y-%m-%d')
 - export GIT_ARTIFACT=premake5-$GIT_TAG.zip
 - "./before_deploy.sh"
 deploy:
