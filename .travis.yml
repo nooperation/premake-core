@@ -1,8 +1,22 @@
 os:
-  - linux
-  - osx
-
+- linux
+- osx
 script:
- - make -f Bootstrap.mak $TRAVIS_OS_NAME
- - bin/release/premake5 test
-
+- make -f Bootstrap.mak $TRAVIS_OS_NAME
+- bin/release/premake5 test
+before_deploy:
+- export GIT_TAG=build-$TRAVIS_BUILD_NUMBER-$TRAVIS_BRANCH-$(date -u '+%Y-%m-%d')
+- export GIT_ARTIFACT=premake5-$GIT_TAG.zip
+- "./before_deploy.sh"
+deploy:
+  provider: releases
+  api_key:
+    secure: focpQwtYZ4EfFaf0NmU5rB6+iDfxflHVWWyzHzbwUA167h4k6PepZhMbYxlgho7Rhof1xlhyM3sFVVBS+pC44LmhxHypsh+RpQhphAJYpvCUoSjKaHhaSxKInFnCGiqY3nxM+NwU/5PLt8cY6XDNfrrOTlf0zsScUaTEuQSvTNF2lHa+RCS0vd0iJjBtPJkFRR5wieNfr5D9a9hRlpIPpTYc+tUL8BWCGFdDofrSASO13j/kXMvsc+Bu9kWC+5+mNJo7vSyl6XwmMI1o31x32HxAVwgkZvES1riUcM4OXpKhtI/JNHUTACNaLFJWlIY1gdgrtFNdu6xKPaPs2pXmWi20OvCOtDi/LjZOgwWj90qEV7Bk6oRofPDrKUPAuafqPRfGSI91ulkbKtMaN5ciXbZBicRG5UzJWLT6TcpNfTiJRhq9yZIMGnfBZaidZ/S6d6LR9DJE0+tgFeRsSp8qOc/DD4PIWM+06r9dNrBXkdnqVPz0tXKjHK987xYDweSiIhn/K1QugzimPp/MfzbHeRLjSAvkxC/5bJQmkWQC7n8peMe/pykvTVxCpHyXgBozl+NIkc0NBzv/9Q0MvPOw1zVG09Bl+Unt7RobmqEZch2LOIYsVWKIvTyvZaHpLtd8tHHsSD6YcAqspJwTstRBvXdut/4RFse1Hk6D1bFcU0M=
+  skip_cleanup: true
+  file: bin/release/premake5
+  on:
+    repo: nooperation/premake-core
+    all_branches: true
+env:
+  global:
+    secure: TCB5TntCKcBUhHjp7k938PEP3dkyc7DgsfCXzv3ES6PNOHb1swWd946umDKSTJoCBEU/+h/A2kfCTLQZHl2+aSqX6x5LZtyzHAhG0nXjgIFO+FWtPA8Cjyg1VUDHBwyz+O8wLkSttxOfgxIMM4BsN2hRUb5Mmy/VyipxOisAlhs+G36P4XdTyaoWjsFrrdd2JuSwwtgJqU0xJYB992QI9e4/ceV6kd1yJl3/L2Lh2nFp8nI97IeC3LNAReBZpSq/Kio/7qCDsYuUeMt6BWOCaVv2VEPnTmA+/pMh/BXtYMKK0T3zYFDVAer5y1XoRtQlIJXn5bnhiTScq6r3sWUR5mDV7+xDZD3NQ1/0Cc98v6Qp2HyA3KQbKnHU1ObDPEyG3S3R9hOSHJ6ddRSve18b69+082wktBMXSOLtYpPdyVFE2vQ/GRqDArsw7S92hNGz8isAADGMF51mjNCOPGbtvDf6g7aRsQDHqgnL7Fa3ilta6ll2kiAADLObpQ8Cz4Bw7TzLJCKDqeTIFDr0GtVmn4MvQeW9vAaQ3HtD37/axcBfbUDKEifiyWuMeqkcYAP4GgxQLylU4+oLsvpl+JiPB0FX/T51svPf/cFw5ZF4g67hqo8jCzAnnxd7wgC8xxbWivWmBwIzrjFXHOyz+imwFBhIokg0cGKNHbDF6UppE0g=
