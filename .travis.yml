@@ -16,7 +16,7 @@ deploy:
   api_key:
     secure: focpQwtYZ4EfFaf0NmU5rB6+iDfxflHVWWyzHzbwUA167h4k6PepZhMbYxlgho7Rhof1xlhyM3sFVVBS+pC44LmhxHypsh+RpQhphAJYpvCUoSjKaHhaSxKInFnCGiqY3nxM+NwU/5PLt8cY6XDNfrrOTlf0zsScUaTEuQSvTNF2lHa+RCS0vd0iJjBtPJkFRR5wieNfr5D9a9hRlpIPpTYc+tUL8BWCGFdDofrSASO13j/kXMvsc+Bu9kWC+5+mNJo7vSyl6XwmMI1o31x32HxAVwgkZvES1riUcM4OXpKhtI/JNHUTACNaLFJWlIY1gdgrtFNdu6xKPaPs2pXmWi20OvCOtDi/LjZOgwWj90qEV7Bk6oRofPDrKUPAuafqPRfGSI91ulkbKtMaN5ciXbZBicRG5UzJWLT6TcpNfTiJRhq9yZIMGnfBZaidZ/S6d6LR9DJE0+tgFeRsSp8qOc/DD4PIWM+06r9dNrBXkdnqVPz0tXKjHK987xYDweSiIhn/K1QugzimPp/MfzbHeRLjSAvkxC/5bJQmkWQC7n8peMe/pykvTVxCpHyXgBozl+NIkc0NBzv/9Q0MvPOw1zVG09Bl+Unt7RobmqEZch2LOIYsVWKIvTyvZaHpLtd8tHHsSD6YcAqspJwTstRBvXdut/4RFse1Hk6D1bFcU0M=
   skip_cleanup: true
-  file: bin/release/premake5
+  file: $GIT_ARTIFACT
   on:
     repo: nooperation/premake-core
     all_branches: true
